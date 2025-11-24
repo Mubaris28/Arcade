@@ -14,7 +14,7 @@ export default function FloatingCTA() {
     >
       <Link href="/contact" className="block group">
         <motion.div
-          className="bg-black text-white px-6 py-4 rounded-2xl shadow-2xl hover:shadow-3xl transition-all"
+          className="bg-[#DC2626] text-white px-6 py-4 rounded-2xl shadow-2xl hover:shadow-3xl transition-all"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >

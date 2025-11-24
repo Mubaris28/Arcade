@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 
 export default function VideoSection() {
   const [isHovering, setIsHovering] = useState(false);
@@ -13,6 +13,10 @@ export default function VideoSection() {
   const springConfig = { damping: 30, stiffness: 150 };
   const xSpring = useSpring(x, springConfig);
   const ySpring = useSpring(y, springConfig);
+  
+  // Combine -50% offset with spring values for proper centering
+  const centerX = useTransform(xSpring, (val) => `calc(-50% + ${val}px)`);
+  const centerY = useTransform(ySpring, (val) => `calc(-50% + ${val}px)`);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -58,7 +62,11 @@ export default function VideoSection() {
           <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-900">
             {/* Static centered play button (default state) */}
             <motion.button
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 bg-[#DC2626] rounded-full flex items-center justify-center shadow-2xl hover:bg-[#B91C1C] transition-colors"
+              className="absolute top-1/2 left-1/2 z-10 w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 bg-[#DC2626] rounded-full flex items-center justify-center shadow-2xl hover:bg-[#B91C1C] transition-colors"
+              style={{
+                x: "-50%",
+                y: "-50%",
+              }}
               initial={{ scale: 1, opacity: 1 }}
               animate={{
                 scale: isHovering ? 0 : 1,
@@ -85,8 +93,8 @@ export default function VideoSection() {
             <motion.button
               className="absolute top-1/2 left-1/2 z-20 w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 bg-[#DC2626] rounded-full flex items-center justify-center shadow-2xl pointer-events-none"
               style={{
-                x: xSpring,
-                y: ySpring,
+                x: centerX,
+                y: centerY,
               }}
               initial={{ scale: 0, opacity: 0 }}
               animate={{
