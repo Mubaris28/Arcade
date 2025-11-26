@@ -9,7 +9,7 @@ export default function AboutHero() {
       <div className="max-w-screen-2xl mx-auto px-6 lg:px-12 w-full">
         <div className="max-w-5xl">
           <TypingText
-            text="Arcade Studios is a web development agency, storyteller, and innovator. We have a gift for finding meaning and using it to transform brands and products."
+            text="Arcade Studios is a web development agency building modern digital products for startups, agencies, and next-gen brands. We specialize in React, Next.js, and full-stack solutions."
             className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
             delay={0}
             wordDelay={0.08}
@@ -19,4 +19,3 @@ export default function AboutHero() {
     </section>
   );
 }
-

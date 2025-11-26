@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { fadeInUp, slideInLeft, slideInRight } from "@/lib/animations";
+import { slideInLeft, slideInRight } from "@/lib/animations";
 import Image from "next/image";
 
 export default function StorySection() {
@@ -17,25 +17,18 @@ export default function StorySection() {
             variants={slideInLeft}
             className="space-y-6"
           >
+            <h2 className="text-4xl md:text-5xl font-bold mb-8">Our Story</h2>
             <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
-              Recently, we led development at innovative startups for 5 years—companies
-              committed to building the future of technology and digital experiences.
+              Arcade Studios was founded with a simple mission: to build exceptional web applications that drive business growth. We started as a small team of passionate developers and designers, united by our belief that great code and thoughtful design can transform businesses.
             </p>
             <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
-              Our journey began over a decade ago, fueled by a passion for crafting
-              exceptional web experiences. We've had the privilege of working with
-              ambitious startups, established agencies, and forward-thinking brands
-              across various industries.
+              Over the years, we've had the privilege of working with ambitious startups, established agencies, and forward-thinking brands across various industries. From e-commerce platforms to SaaS applications, we've helped our clients bring their digital visions to life.
             </p>
             <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
-              We believe in the power of thoughtful design, clean code, and meaningful
-              interactions. Every project is an opportunity to push boundaries and
-              create something remarkable.
+              We believe in the power of modern web technologies, clean code, and meaningful user experiences. Every project is an opportunity to push boundaries and create something remarkable that solves real problems.
             </p>
             <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
-              Today, we continue to build digital products that matter—solutions that
-              solve real problems and create lasting value for users and businesses
-              alike.
+              Today, we continue to evolve and grow, always staying at the forefront of web development trends and best practices. Our commitment to excellence and client success remains at the heart of everything we do.
             </p>
           </motion.div>
 
@@ -45,7 +38,7 @@ export default function StorySection() {
             whileInView="animate"
             viewport={{ once: true, margin: "-100px" }}
             variants={slideInRight}
-            className="relative aspect-square bg-gray-200 rounded-lg overflow-hidden"
+            className="relative aspect-square bg-gray-200 rounded-3xl overflow-hidden"
           >
             {/* Placeholder */}
             <div className="absolute inset-0 flex items-center justify-center text-gray-500">
@@ -69,4 +62,3 @@ export default function StorySection() {
     </section>
   );
 }
-

@@ -58,18 +58,18 @@ export default function BrandShowcase() {
             className="lg:col-span-5 flex flex-col justify-center"
           >
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight tracking-tight">
-              I transform brands
+              We build digital products
             </h2>
             <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
-              From digital products to creative strategy—I define, design, and
-              launch ideas that unlock hidden potential.
+              From React applications to full-stack solutions—we architect, develop, and
+              deploy web products that scale with your business.
             </p>
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   <Link
                     href="/about"
                     className="inline-flex items-center px-8 py-4 bg-[#DC2626] text-white rounded-full hover:bg-[#B91C1C] transition-all font-medium w-fit shadow-lg hover:shadow-xl"
                   >
-                    Meet Kyson
+                    Meet the team
                     <motion.svg
                       width="20"
                       height="20"

@@ -1,28 +1,27 @@
 import { Metadata } from "next";
 import AboutHero from "@/components/sections/about/AboutHero";
 import StorySection from "@/components/sections/about/StorySection";
-import ExperienceSection from "@/components/sections/about/ExperienceSection";
-import ServicesSection from "@/components/sections/about/ServicesSection";
+import TeamSection from "@/components/sections/about/TeamSection";
+import ValuesSection from "@/components/sections/about/ValuesSection";
 import FullWidthImage from "@/components/sections/about/FullWidthImage";
-import PhilosophySection from "@/components/sections/about/PhilosophySection";
 
 export const metadata: Metadata = {
-  title: "About Kyson | Creative Director & Designer | Arcade Studios",
+  title: "About Us | Arcade Studios | Web Development Agency",
   description:
-    "Meet Kyson Dana, award-winning creative director with 10+ years experience. Former lead designer at Rivian for 5 years. Specializing in brand transformation, product design, and digital storytelling for innovative companies.",
+    "Meet the Arcade Studios team—a web development agency building modern digital products for startups, agencies, and next-gen brands. Specializing in React, Next.js, and full-stack solutions.",
   keywords: [
-    "about kyson dana",
-    "creative director biography",
-    "rivian designer",
-    "brand transformation expert",
-    "product design expertise",
-    "digital storytelling",
-    "design philosophy",
+    "about arcade studios",
+    "web development team",
+    "react developers",
+    "next.js agency",
+    "full-stack development",
+    "web development company",
+    "software development team",
   ],
   openGraph: {
-    title: "About Kyson | Creative Director & Designer",
-    description: "Former Rivian lead designer with 10+ years transforming brands and creating digital products.",
-    type: "profile",
+    title: "About Us | Arcade Studios",
+    description: "A web development agency building modern digital products for next-gen brands.",
+    type: "website",
   },
 };
 
@@ -33,10 +32,9 @@ export default function AboutPage() {
         <AboutHero />
       </div>
       <StorySection />
-      <ExperienceSection />
-      <ServicesSection />
+      <TeamSection />
+      <ValuesSection />
       <FullWidthImage />
-      <PhilosophySection />
     </div>
   );
 }

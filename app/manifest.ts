@@ -2,9 +2,9 @@ import { MetadataRoute } from 'next'
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Arcade Studios | Creative Director & Product Designer',
+    name: 'Arcade Studios | Web Development Agency',
     short_name: 'Arcade Studios',
-    description: 'Award-winning creative director and product designer specializing in brand transformation and digital products.',
+    description: 'Web development agency building modern web applications, digital products, and innovative solutions for startups, agencies, and next-gen brands.',
     start_url: '/',
     display: 'standalone',
     background_color: '#ffffff',
@@ -18,6 +18,7 @@ export default function manifest(): MetadataRoute.Manifest {
     ],
   }
 }
+
 
 
 

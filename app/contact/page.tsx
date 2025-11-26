@@ -3,20 +3,20 @@ import ContactHero from "@/components/sections/contact/ContactHero";
 import ContactFormSection from "@/components/sections/contact/ContactFormSection";
 
 export const metadata: Metadata = {
-  title: "Work With Me | Contact Kyson | Arcade Studios",
+  title: "Contact Us | Arcade Studios | Web Development Agency",
   description:
-    "Ready to transform your brand? Get in touch with Kyson Dana for creative direction, product design, and brand strategy. Available for select projects with startups, agencies, and next-gen brands.",
+    "Ready to build your next web application? Get in touch with Arcade Studios for web development, React, Next.js, and full-stack solutions. Available for projects with startups, agencies, and next-gen brands.",
   keywords: [
-    "hire creative director",
-    "contact designer",
-    "brand transformation services",
-    "product design consultation",
-    "freelance creative director",
-    "design collaboration",
+    "hire web developers",
+    "contact web agency",
+    "web development services",
+    "react development consultation",
+    "next.js development",
+    "full-stack development",
   ],
   openGraph: {
-    title: "Work With Me | Contact Kyson",
-    description: "Let's transform your brand. Available for select creative direction and product design projects.",
+    title: "Contact Us | Arcade Studios",
+    description: "Let's build your next digital product. Available for web development projects.",
     type: "website",
   },
 };
