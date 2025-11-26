@@ -65,7 +65,7 @@ export default function Navbar() {
                       href="/contact"
                       className="px-6 py-3 bg-[#DC2626] text-white rounded-full font-medium hover:bg-[#B91C1C] transition-all shadow-md hover:shadow-lg inline-block"
                     >
-                      Work with me
+                      Work with us
                     </Link>
                   </motion.div>
             </div>

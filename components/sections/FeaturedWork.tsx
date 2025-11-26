@@ -31,14 +31,6 @@ const CASE_STUDIES = [
     image: "photo-1551632811-561732d1e306?w=1600&h=900&fit=crop",
     bgGradient: "from-red-900 via-gray-800 to-black",
   },
-  {
-    slug: "snowboard-design",
-    title: "Crafting the ultimate snowboard experience",
-    client: "Cardiff",
-    isComingSoon: true,
-    image: "photo-1418290232843-5d7a0bd93f7d?w=1600&h=900&fit=crop",
-    bgGradient: "from-teal-900 via-gray-800 to-black",
-  },
 ];
 
 export default function FeaturedWork() {
