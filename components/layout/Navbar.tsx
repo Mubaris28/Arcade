@@ -26,15 +26,16 @@ export default function Navbar() {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
-        className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
-          scrolled
-            ? "bg-white/95 backdrop-blur-lg border-b border-gray-200 shadow-sm"
-            : "bg-white"
-        )}
+        className="fixed top-0 left-0 right-0 z-50 pt-4 px-4 lg:px-6"
       >
-        <div className="max-w-screen-2xl mx-auto px-6 lg:px-12">
-          <div className="flex items-center justify-between h-20">
+        <div className={cn(
+          "max-w-screen-2xl mx-auto rounded-3xl transition-all duration-500 shadow-elegant",
+          scrolled
+            ? "bg-white/95 backdrop-blur-lg border border-gray-200"
+            : "bg-white border border-gray-200"
+        )}>
+          <div className="px-6 lg:px-8">
+            <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <Link
               href="/"
@@ -142,6 +143,7 @@ export default function Navbar() {
               </svg>
             </button>
           </div>
+        </div>
         </div>
       </motion.nav>
 

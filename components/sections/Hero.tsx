@@ -19,7 +19,7 @@ export default function Hero() {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-white pt-24 pb-16"
+      className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-white pt-32 md:pt-30 pb-16"
     >
       {/* Subtle decorative elements */}
       <div className="absolute top-20 right-0 w-[500px] h-[500px] bg-red-500/3 rounded-full blur-3xl" />

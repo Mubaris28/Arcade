@@ -10,10 +10,10 @@ export default function Footer() {
   const isInView = useInView(containerRef, { once: true, margin: "-10%" });
 
   return (
-    <footer ref={containerRef} className="bg-white border-t border-gray-100">
+    <footer ref={containerRef} className="bg-white pb-4 px-4 lg:px-6">
       {/* Footer Content */}
-      <div className="py-16 md:py-20 bg-gray-50">
-        <div className="max-w-screen-2xl mx-auto px-6 lg:px-12">
+      <div className="max-w-screen-2xl mx-auto">
+        <div className="bg-gray-50 border border-gray-200 rounded-3xl shadow-elegant py-16 md:py-20 px-6 lg:px-12">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
