@@ -3,7 +3,7 @@ import AboutHero from "@/components/sections/about/AboutHero";
 import StorySection from "@/components/sections/about/StorySection";
 import TeamSection from "@/components/sections/about/TeamSection";
 import ValuesSection from "@/components/sections/about/ValuesSection";
-import FullWidthImage from "@/components/sections/about/FullWidthImage";
+import CTA from "@/components/sections/CTA";
 
 export const metadata: Metadata = {
   title: "About Us | Arcade Studios | Web Development Agency",
@@ -28,14 +28,11 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <div className="bg-white min-h-screen">
-      <div className="bg-gradient-to-b from-black to-gray-900 min-h-screen flex items-center justify-center">
-        <AboutHero />
-      </div>
+      <AboutHero />
       <StorySection />
       <TeamSection />
       <ValuesSection />
-      <FullWidthImage />
+      <CTA title="Ready to work with us?" href="/contact" />
     </div>
   );
 }
-

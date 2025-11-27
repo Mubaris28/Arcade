@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { motion } from "framer-motion";
 import FeaturedWork from "@/components/sections/FeaturedWork";
 import CTA from "@/components/sections/CTA";
 
@@ -9,26 +10,22 @@ export const metadata: Metadata = {
   keywords: [
     "design portfolio",
     "case studies",
-    "rivian design",
-    "electric vehicle design",
-    "brand transformation projects",
+    "web development portfolio",
     "digital product design",
     "UI/UX case studies",
-    "automotive design",
   ],
   openGraph: {
     title: "Design Portfolio & Case Studies | Arcade Studios",
-    description: "Award-winning design work for Rivian, Tesla, Black Diamond, and innovative next-gen brands.",
+    description: "Award-winning design work for innovative next-gen brands.",
     type: "website",
   },
 };
 
 export default function WorkPage() {
   return (
-    <div className="bg-white min-h-screen">
+    <div className="bg-white min-h-screen pt-20">
       <FeaturedWork />
-      <CTA title="See all work" href="#" theme="light" />
+      <CTA title="Have a project in mind?" href="/contact" />
     </div>
   );
 }
-

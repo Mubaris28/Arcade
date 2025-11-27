@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import FloatingCTA from "@/components/layout/FloatingCTA";
+import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -12,23 +12,33 @@ const inter = Inter({
   display: "swap",
 });
 
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-playfair",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "Arcade Studios | Web Development Agency",
   description:
-    "Arcade Studios builds modern web applications, digital products, and innovative solutions for startups, agencies, and next-gen brands.",
+    "Award-winning web development agency building modern applications, digital products, and innovative solutions. Transforming ideas into exceptional digital experiences.",
   keywords: [
-    "web development",
+    "web development agency",
     "digital products",
     "web applications",
-    "next.js",
-    "react",
-    "agency",
+    "next.js development",
+    "react development",
+    "creative agency",
+    "technology studio",
+    "award-winning agency",
   ],
   authors: [{ name: "Arcade Studios" }],
   openGraph: {
     title: "Arcade Studios | Web Development Agency",
     description:
-      "Building digital products for next-gen brands. Modern web applications and innovative solutions.",
+      "Award-winning web development agency transforming ideas into exceptional digital experiences.",
     type: "website",
     locale: "en_US",
     siteName: "Arcade Studios",
@@ -36,7 +46,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Arcade Studios | Web Development Agency",
-    description: "Building digital products for next-gen brands.",
+    description: "Award-winning web development agency building exceptional digital experiences.",
   },
 };
 
@@ -46,14 +56,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className="antialiased bg-gray-50">
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
-        <FloatingCTA />
+    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
+      <body className="antialiased bg-white text-gray-900">
+        <SmoothScrollProvider>
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+        </SmoothScrollProvider>
       </body>
     </html>
   );
 }
-

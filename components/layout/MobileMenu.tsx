@@ -11,7 +11,6 @@ interface MobileMenuProps {
 }
 
 export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
-  // Prevent body scroll when menu is open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -34,7 +33,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-black/50 z-50"
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50"
             onClick={onClose}
           />
 
@@ -44,17 +43,17 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "tween", duration: 0.3, ease: "easeInOut" }}
-            className="fixed top-0 right-0 bottom-0 w-full max-w-sm bg-white z-50 shadow-2xl"
+            className="fixed top-0 right-0 bottom-0 w-full max-w-sm bg-white z-50 shadow-elegant-xl"
           >
             <div className="flex flex-col h-full">
               {/* Header */}
-              <div className="flex items-center justify-between p-6 border-b">
-                <span className="text-xl font-bold">
-                  {SITE_CONFIG.name}
+              <div className="flex items-center justify-between p-6 border-b border-gray-100">
+                <span className="text-xl font-bold text-black">
+                  {SITE_CONFIG.name.split(' ')[0]}<span className="text-red-600">.</span>
                 </span>
                 <button
                   onClick={onClose}
-                  className="p-2 hover:opacity-70 transition-opacity"
+                  className="p-2 text-black hover:text-red-600 transition-colors"
                   aria-label="Close menu"
                 >
                   <svg
@@ -62,7 +61,6 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                     height="24"
                     viewBox="0 0 24 24"
                     fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
                       d="M18 6L6 18"
@@ -93,7 +91,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                       <Link
                         href={link.href}
                         onClick={onClose}
-                        className="text-2xl font-bold hover:opacity-70 transition-opacity block"
+                        className="text-3xl font-bold text-black hover:text-red-600 transition-colors block"
                       >
                         {link.label}
                       </Link>
@@ -102,36 +100,53 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 </ul>
               </nav>
 
+              {/* CTA Button */}
+              <div className="p-6">
+                <Link
+                  href="/contact"
+                  onClick={onClose}
+                  className="block w-full py-4 bg-black text-white text-center rounded-full font-medium hover:bg-red-600 transition-colors shadow-elegant"
+                >
+                  Let's Talk
+                </Link>
+              </div>
+
               {/* Footer */}
-              <div className="p-6 border-t">
+              <div className="p-6 border-t border-gray-100">
                 <p className="text-sm text-gray-600 mb-4">
                   {SITE_CONFIG.tagline}
                 </p>
                 <div className="flex space-x-4">
-                  <a
-                    href={SITE_CONFIG.social.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm hover:opacity-70 transition-opacity"
-                  >
-                    LinkedIn
-                  </a>
-                  <a
-                    href={SITE_CONFIG.social.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm hover:opacity-70 transition-opacity"
-                  >
-                    GitHub
-                  </a>
-                  <a
-                    href={SITE_CONFIG.social.twitter}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm hover:opacity-70 transition-opacity"
-                  >
-                    Twitter
-                  </a>
+                  {SITE_CONFIG.social.twitter && (
+                    <a
+                      href={SITE_CONFIG.social.twitter}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-gray-600 hover:text-black transition-colors"
+                    >
+                      Twitter
+                    </a>
+                  )}
+                  {SITE_CONFIG.social.linkedin && (
+                    <a
+                      href={SITE_CONFIG.social.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-gray-600 hover:text-black transition-colors"
+                    >
+                      LinkedIn
+                    </a>
+                  )}
+                  {SITE_CONFIG.social.instagram && (
+                    <a
+                      href={SITE_CONFIG.social.instagram}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-gray-600 hover:text-black transition-colors"
+                    >
+                      Instagram
+                    </a>
+                  )}
                 </div>
               </div>
             </div>
@@ -141,6 +156,3 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
     </AnimatePresence>
   );
 }
-
-
-

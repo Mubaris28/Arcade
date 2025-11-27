@@ -23,13 +23,13 @@ export default function Navbar() {
   return (
     <>
       <motion.nav
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.4 }}
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
           scrolled
-            ? "bg-white/95 backdrop-blur-sm"
+            ? "bg-white/95 backdrop-blur-lg border-b border-gray-200 shadow-sm"
             : "bg-white"
         )}
       >
@@ -38,41 +38,80 @@ export default function Navbar() {
             {/* Logo */}
             <Link
               href="/"
-              className="flex items-center space-x-3 hover:opacity-70 transition-opacity"
+              className="group flex items-center"
             >
-              <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center">
-                <div className="w-6 h-6 border-2 border-white rounded-full"></div>
-              </div>
-              <div className="text-left">
-                <div className="text-xs font-medium text-gray-600">Designer</div>
-                <div className="text-sm font-bold">{SITE_CONFIG.name}</div>
-              </div>
+              <motion.span 
+                className="text-xl md:text-2xl font-bold text-black"
+                whileHover={{ scale: 1.05 }}
+              >
+                {SITE_CONFIG.name.split(' ')[0]}<span className="text-red-600">.</span>
+              </motion.span>
             </Link>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-8">
-              {NAV_LINKS.map((link) => (
-                <Link
+            {/* Center Navigation - Desktop */}
+            <div className="hidden md:flex items-center space-x-1">
+              {NAV_LINKS.map((link, index) => (
+                <motion.div
                   key={link.href}
-                  href={link.href}
-                  className="text-base font-normal hover:opacity-70 transition-opacity"
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 * index, duration: 0.4 }}
                 >
-                  {link.label}
-                </Link>
+                  <Link
+                    href={link.href}
+                    className="relative px-4 py-2 text-gray-700 hover:text-black transition-colors font-medium group"
+                  >
+                    <span className="relative z-10">{link.label}</span>
+                    <span className="absolute bottom-1 left-4 right-4 h-0.5 bg-red-600 scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
+                  </Link>
+                </motion.div>
               ))}
-                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                    <Link
-                      href="/contact"
-                      className="px-6 py-3 bg-[#DC2626] text-white rounded-full font-medium hover:bg-[#B91C1C] transition-all shadow-md hover:shadow-lg inline-block"
-                    >
-                      Work with us
-                    </Link>
-                  </motion.div>
             </div>
+
+            {/* CTA Button - Desktop */}
+            <motion.div 
+              className="hidden md:block"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.4 }}
+            >
+              <Link
+                href="/contact"
+                className="group relative inline-flex items-center gap-2 px-6 py-3 bg-black text-white rounded-full overflow-hidden transition-all hover:shadow-elegant-lg"
+              >
+                <motion.div
+                  className="absolute inset-0 bg-red-600"
+                  initial={{ x: "-100%" }}
+                  whileHover={{ x: 0 }}
+                  transition={{ duration: 0.3 }}
+                />
+                <span className="relative z-10 font-medium">Let's Talk</span>
+                <motion.span
+                  className="relative z-10"
+                  animate={{ x: [0, 3, 0] }}
+                  transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+                >
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M5 12H19M19 12L12 5M19 12L12 19"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </motion.span>
+              </Link>
+            </motion.div>
 
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden p-2 hover:opacity-70 transition-opacity"
+              className="md:hidden p-2 text-black hover:text-red-600 transition-colors"
               onClick={() => setMobileMenuOpen(true)}
               aria-label="Open menu"
             >
@@ -81,7 +120,6 @@ export default function Navbar() {
                 height="24"
                 viewBox="0 0 24 24"
                 fill="none"
-                xmlns="http://www.w3.org/2000/svg"
               >
                 <path
                   d="M3 12H21"
@@ -107,7 +145,6 @@ export default function Navbar() {
         </div>
       </motion.nav>
 
-      {/* Mobile Menu */}
       <MobileMenu
         isOpen={mobileMenuOpen}
         onClose={() => setMobileMenuOpen(false)}
@@ -115,4 +152,3 @@ export default function Navbar() {
     </>
   );
 }
-

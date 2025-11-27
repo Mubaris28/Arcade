@@ -1,72 +1,105 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ANIMATION_TIMINGS } from "@/lib/constants";
+import { useRef } from "react";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import Link from "next/link";
 
 export default function Hero() {
-  return (
-    <section className="min-h-screen flex items-center bg-gray-50 pt-20">
-      <div className="max-w-screen-2xl mx-auto px-6 lg:px-12 w-full">
-        {/* Main Headline */}
-        <div className="max-w-7xl mb-16">
-          <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[1.05] tracking-tight text-black">
-            We build modern web applications, digital products, and innovative solutions for startups, agencies, and next-gen brands.
-          </h1>
-        </div>
+  const containerRef = useRef<HTMLElement>(null);
+  const isInView = useInView(containerRef, { once: true });
 
-        {/* Bottom Row: Content and Arrow */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
-          {/* Spacer */}
-          <div className="lg:col-span-7"></div>
-          
-          {/* Side Content */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              delay: 0.3,
-              duration: 0.6,
-            }}
-            className="lg:col-span-5"
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], [0, 100]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
+  return (
+    <section
+      ref={containerRef}
+      className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-white pt-24 pb-16"
+    >
+      {/* Subtle decorative elements */}
+      <div className="absolute top-20 right-0 w-[500px] h-[500px] bg-red-500/3 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-red-500/2 rounded-full blur-3xl" />
+
+      <motion.div
+        style={{ y, opacity }}
+        className="relative z-10 max-w-screen-xl mx-auto px-6 lg:px-12 w-full text-center"
+      >
+        {/* Main Headline */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+        >
+          <h1 className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-black leading-[0.95] tracking-tighter mb-8">
+            Building digital
+            <br />
+            experiences that
+            <br />
+            inspire action.
+          </h1>
+        </motion.div>
+
+        {/* Description */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ delay: 0.3, duration: 0.6 }}
+          className="text-xl md:text-2xl text-gray-600 leading-relaxed mb-12 max-w-3xl mx-auto"
+        >
+          Award-winning web development agency building modern applications
+          that drive real business results.
+        </motion.p>
+
+        {/* CTAs */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ delay: 0.5, duration: 0.6 }}
+          className="flex flex-col sm:flex-row gap-4 justify-center"
+        >
+          <Link
+            href="/contact"
+            className="group relative inline-flex items-center justify-center px-8 py-4 bg-black text-white rounded-full overflow-hidden transition-all hover:shadow-elegant-lg"
           >
-            <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-6">
-              We're <span className="bg-black text-white px-2 py-1 rounded">Arcade Studios</span>—a web development agency specializing in React, Next.js, and full-stack solutions. We transform ideas into scalable digital products that drive business growth.
-            </p>
             <motion.div
-              animate={{ y: [0, 10, 0] }}
-              transition={{
-                repeat: Infinity,
-                duration: 2,
-                ease: "easeInOut",
-              }}
-              className="w-12"
+              className="absolute inset-0 bg-red-600"
+              initial={{ x: "-100%" }}
+              whileHover={{ x: 0 }}
+              transition={{ duration: 0.3 }}
+            />
+            <span className="relative z-10 font-medium">Start a Project</span>
+            <motion.svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              className="relative z-10 ml-2"
+              animate={{ x: [0, 4, 0] }}
+              transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
             >
-              <svg
-                width="48"
-                height="48"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M12 5V19"
-                  stroke="#DC2626"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                />
-                <path
-                  d="M19 12L12 19L5 12"
-                  stroke="#DC2626"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </motion.div>
-          </motion.div>
-        </div>
-      </div>
+              <path
+                d="M5 12H19M19 12L12 5M19 12L12 19"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </motion.svg>
+          </Link>
+
+          <Link
+            href="/work"
+            className="inline-flex items-center justify-center px-8 py-4 border-2 border-black text-black rounded-full hover:bg-black hover:text-white transition-all"
+          >
+            <span className="font-medium">View Our Work</span>
+          </Link>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }
-
