@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, MouseEvent } from "react";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import Link from "next/link";
 
@@ -16,14 +16,40 @@ export default function Hero() {
   const y = useTransform(scrollYProgress, [0, 1], [0, 100]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
+  // 3D tilt effect states
+  const [leftCardTilt, setLeftCardTilt] = useState({ x: 0, y: 0 });
+  const [workCardTilt, setWorkCardTilt] = useState({ x: 0, y: 0 });
+  const [projectCardTilt, setProjectCardTilt] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (
+    e: MouseEvent<HTMLDivElement>,
+    setter: typeof setLeftCardTilt
+  ) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = (y - centerY) / 10;
+    const rotateY = (centerX - x) / 10;
+
+    setter({ x: rotateX, y: rotateY });
+  };
+
+  const handleMouseLeave = (setter: typeof setLeftCardTilt) => {
+    setter({ x: 0, y: 0 });
+  };
+
   return (
     <section
       ref={containerRef}
-      className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-white pt-32 md:pt-30 pb-16"
+      className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-black pt-32 md:pt-30 pb-16"
     >
-      {/* Subtle decorative elements */}
-      <div className="absolute top-20 right-0 w-[500px] h-[500px] bg-red-500/3 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-red-500/2 rounded-full blur-3xl" />
+      {/* Abstract blurred red shapes */}
+      <div className="absolute top-0 left-0 w-[600px] h-[400px] bg-red-600/40 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 right-0 w-[500px] h-[350px] bg-red-500/30 rounded-full blur-2xl" />
+      <div className="absolute top-1/2 left-1/3 w-[300px] h-[200px] bg-red-700/30 rounded-full blur-2xl" />
 
       <motion.div
         style={{ y, opacity }}
@@ -35,18 +61,16 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="group relative rounded-3xl overflow-hidden shadow-elegant-lg hover:shadow-elegant-xl transition-all flex flex-col justify-center"
+            onMouseMove={(e) => handleMouseMove(e, setLeftCardTilt)}
+            onMouseLeave={() => handleMouseLeave(setLeftCardTilt)}
+            style={{
+              transform: `perspective(1000px) rotateX(${leftCardTilt.x}deg) rotateY(${leftCardTilt.y}deg) scale3d(1, 1, 1)`,
+              transition: "transform 0.1s ease-out",
+            }}
+            className="group relative rounded-3xl overflow-hidden shadow-elegant-lg hover:shadow-elegant-xl flex flex-col justify-center bg-black"
           >
-            {/* Background Image */}
-            <div 
-              className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
-              style={{
-                backgroundImage: "url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop')",
-              }}
-            />
-            
             {/* Overlay for text readability */}
-            <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/60 to-black/70 group-hover:from-black/75 group-hover:via-black/65 group-hover:to-black/75 transition-all duration-500" />
+            <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/70 to-black/80 group-hover:from-black/85 group-hover:via-black/75 group-hover:to-black/85 transition-all duration-500" />
 
             {/* Content */}
             <div className="relative z-10 p-8 md:p-10 lg:p-12">
@@ -56,7 +80,7 @@ export default function Hero() {
               </h1>
 
               {/* Description */}
-              <p className="text-lg md:text-xl text-gray-200 leading-relaxed">
+              <p className="text-lg md:text-xl text-red-200 leading-relaxed">
                 Award-winning web development agency building modern applications
                 that drive real business results.
               </p>
@@ -71,19 +95,15 @@ export default function Hero() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ delay: 0.45, duration: 0.6 }}
-                className="group relative flex items-center justify-center text-white rounded-3xl overflow-hidden shadow-elegant-xl hover:shadow-2xl transition-all h-[320px] lg:h-[360px]"
+                onMouseMove={(e) => handleMouseMove(e, setWorkCardTilt)}
+                onMouseLeave={() => handleMouseLeave(setWorkCardTilt)}
+                style={{
+                  transform: `perspective(1000px) rotateX(${workCardTilt.x}deg) rotateY(${workCardTilt.y}deg) scale3d(1, 1, 1)`,
+                  transition: "transform 0.1s ease-out",
+                }}
+                className="group relative flex items-center justify-center text-white rounded-3xl overflow-hidden shadow-elegant-xl hover:shadow-2xl h-[320px] lg:h-[360px] bg-gradient-to-br from-black via-red-900 to-black"
               >
-                {/* Background Image */}
-                <div 
-                  className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
-                  style={{
-                    backgroundImage: "url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072&auto=format&fit=crop')",
-                  }}
-                />
-                
-                {/* Dark overlay for text readability */}
-                <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/40 to-black/60 group-hover:from-black/70 group-hover:via-black/50 group-hover:to-black/70 transition-all duration-500" />
-
+                <div className="absolute inset-0 bg-red-900/30 rounded-3xl blur-xl" />
                 <div className="relative z-10 p-8 md:p-10 w-full text-center">
                   <h3 className="text-4xl md:text-5xl font-bold">View our work</h3>
                 </div>
@@ -96,7 +116,13 @@ export default function Hero() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ delay: 0.6, duration: 0.6 }}
-                className="group relative flex items-center justify-center text-white rounded-3xl overflow-hidden shadow-elegant-lg hover:shadow-2xl transition-all h-[200px] lg:h-[220px] bg-gradient-to-br from-red-600 to-red-700 hover:from-red-700 hover:to-red-800"
+                onMouseMove={(e) => handleMouseMove(e, setProjectCardTilt)}
+                onMouseLeave={() => handleMouseLeave(setProjectCardTilt)}
+                style={{
+                  transform: `perspective(1000px) rotateX(${projectCardTilt.x}deg) rotateY(${projectCardTilt.y}deg) scale3d(1, 1, 1)`,
+                  transition: "transform 0.1s ease-out",
+                }}
+                className="group relative flex items-center justify-center text-white rounded-3xl overflow-hidden shadow-elegant-lg hover:shadow-2xl h-[200px] lg:h-[220px] bg-gradient-to-br from-red-600 to-red-700 hover:from-red-700 hover:to-red-800"
               >
                 <div className="relative z-10 p-6 md:p-8 w-full text-center">
                   <h4 className="text-3xl md:text-4xl font-bold">start a project</h4>
