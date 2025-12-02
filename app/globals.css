@@ -76,7 +76,7 @@ body {
   }
 
   .container-custom {
-    max-width: 1440px;
+    max-width: 100%;
     margin-left: auto;
     margin-right: auto;
     padding-left: 1.5rem;
@@ -90,8 +90,16 @@ body {
     }
   }
 
+  @media (min-width: 1920px) {
+    .container-custom {
+      padding-left: 6rem;
+      padding-right: 6rem;
+    }
+  }
+
   .text-gradient-red-black {
     background: linear-gradient(to right, var(--color-red), var(--color-black));
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
@@ -129,6 +137,123 @@ body {
 
   .underline-reveal:hover::after {
     transform: scaleX(1);
+  }
+
+  /* Floating animation for hero background */
+  @keyframes float-slow {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-30px);
+    }
+  }
+
+  @keyframes float-medium {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  @keyframes float-fast {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-40px);
+    }
+  }
+
+  .animate-float-slow {
+    animation: float-slow 8s ease-in-out infinite;
+  }
+
+  .animate-float-medium {
+    animation: float-medium 6s ease-in-out infinite;
+  }
+
+  .animate-float-fast {
+    animation: float-fast 5s ease-in-out infinite;
+  }
+
+  /* Gradient flow animations */
+  @keyframes gradient-shift-slow {
+    0%, 100% {
+      transform: translate(0, 0) scale(1);
+      opacity: 0.2;
+    }
+    33% {
+      transform: translate(50px, -30px) scale(1.1);
+      opacity: 0.25;
+    }
+    66% {
+      transform: translate(-30px, 40px) scale(0.95);
+      opacity: 0.15;
+    }
+  }
+
+  @keyframes gradient-shift-medium {
+    0%, 100% {
+      transform: translate(0, 0) scale(1);
+      opacity: 0.1;
+    }
+    33% {
+      transform: translate(-40px, 50px) scale(1.05);
+      opacity: 0.15;
+    }
+    66% {
+      transform: translate(30px, -40px) scale(0.98);
+      opacity: 0.08;
+    }
+  }
+
+  @keyframes gradient-shift-fast {
+    0%, 100% {
+      transform: translate(0, 0) scale(1);
+      opacity: 0.15;
+    }
+    33% {
+      transform: translate(-50px, -50px) scale(1.08);
+      opacity: 0.2;
+    }
+    66% {
+      transform: translate(40px, 30px) scale(0.92);
+      opacity: 0.12;
+    }
+  }
+
+  @keyframes gradient-shift-slow-reverse {
+    0%, 100% {
+      transform: translate(0, 0) scale(1);
+      opacity: 0.08;
+    }
+    33% {
+      transform: translate(40px, 40px) scale(1.12);
+      opacity: 0.12;
+    }
+    66% {
+      transform: translate(-50px, -30px) scale(0.9);
+      opacity: 0.06;
+    }
+  }
+
+  .animate-gradient-shift-slow {
+    animation: gradient-shift-slow 20s ease-in-out infinite;
+  }
+
+  .animate-gradient-shift-medium {
+    animation: gradient-shift-medium 15s ease-in-out infinite;
+  }
+
+  .animate-gradient-shift-fast {
+    animation: gradient-shift-fast 12s ease-in-out infinite;
+  }
+
+  .animate-gradient-shift-slow-reverse {
+    animation: gradient-shift-slow-reverse 18s ease-in-out infinite;
   }
 }
 

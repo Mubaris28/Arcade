@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { NAV_LINKS, SITE_CONFIG } from "@/lib/constants";
@@ -8,9 +8,10 @@ import { NAV_LINKS, SITE_CONFIG } from "@/lib/constants";
 interface MobileMenuProps {
   isOpen: boolean;
   onClose: () => void;
+  buttonPosition: { x: number; y: number };
 }
 
-export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
+export default function MobileMenu({ isOpen, onClose, buttonPosition }: MobileMenuProps) {
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -23,6 +24,14 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
     };
   }, [isOpen]);
 
+  // Calculate the clip-path origin based on button position
+  const clipPathOrigin = useMemo(() => {
+    if (typeof window === 'undefined') return '95% 5%';
+    const xPercent = (buttonPosition.x / window.innerWidth) * 100;
+    const yPercent = (buttonPosition.y / window.innerHeight) * 100;
+    return `${xPercent}% ${yPercent}%`;
+  }, [buttonPosition]);
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -32,18 +41,30 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.4 }}
             className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50"
             onClick={onClose}
           />
 
-          {/* Menu Panel */}
+          {/* Menu Panel with Wave Effect */}
           <motion.div
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "100%" }}
-            transition={{ type: "tween", duration: 0.3, ease: "easeInOut" }}
-            className="fixed top-0 right-0 bottom-0 w-full max-w-sm bg-white z-50 shadow-elegant-xl"
+            initial={{ 
+              clipPath: `circle(0% at ${clipPathOrigin})`,
+              opacity: 0
+            }}
+            animate={{ 
+              clipPath: `circle(150% at ${clipPathOrigin})`,
+              opacity: 1
+            }}
+            exit={{ 
+              clipPath: `circle(0% at ${clipPathOrigin})`,
+              opacity: 0
+            }}
+            transition={{ 
+              duration: 0.6, 
+              ease: [0.22, 1, 0.36, 1]
+            }}
+            className="fixed inset-0 w-full bg-white z-50 shadow-elegant-xl"
           >
             <div className="flex flex-col h-full">
               {/* Header */}
@@ -84,9 +105,13 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                   {NAV_LINKS.map((link, index) => (
                     <motion.li
                       key={link.href}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1, duration: 0.3 }}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ 
+                        delay: 0.3 + (index * 0.1), 
+                        duration: 0.4,
+                        ease: [0.22, 1, 0.36, 1]
+                      }}
                     >
                       <Link
                         href={link.href}
@@ -101,7 +126,16 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               </nav>
 
               {/* CTA Button */}
-              <div className="p-6">
+              <motion.div 
+                className="p-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ 
+                  delay: 0.6, 
+                  duration: 0.4,
+                  ease: [0.22, 1, 0.36, 1]
+                }}
+              >
                 <Link
                   href="/contact"
                   onClick={onClose}
@@ -109,10 +143,18 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 >
                   Let's Talk
                 </Link>
-              </div>
+              </motion.div>
 
               {/* Footer */}
-              <div className="p-6 border-t border-gray-100">
+              <motion.div 
+                className="p-6 border-t border-gray-100"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ 
+                  delay: 0.7, 
+                  duration: 0.4
+                }}
+              >
                 <p className="text-sm text-gray-600 mb-4">
                   {SITE_CONFIG.tagline}
                 </p>
@@ -148,7 +190,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                     </a>
                   )}
                 </div>
-              </div>
+              </motion.div>
             </div>
           </motion.div>
         </>

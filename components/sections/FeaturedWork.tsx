@@ -51,16 +51,16 @@ export default function FeaturedWork() {
   return (
     <section
       ref={containerRef}
-      className="relative py-20 md:py-28 bg-white overflow-hidden"
+      className="relative py-20 md:py-28 overflow-hidden"
     >
-      <div className="max-w-screen-2xl mx-auto px-6 lg:px-12">
+      <div className="w-full mx-auto px-6 lg:px-12 3xl:px-24">
         {/* Section Header */}
         <div className="mb-16 md:mb-20">
           <motion.span
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6 }}
-            className="inline-block px-4 py-2 bg-red-50 text-red-600 text-xs font-medium uppercase tracking-wider rounded-full mb-6"
+            className="inline-block px-4 py-2 bg-red-600 text-white text-xs font-medium uppercase tracking-wider rounded-full mb-6"
           >
             Featured Work
           </motion.span>
@@ -69,7 +69,7 @@ export default function FeaturedWork() {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ delay: 0.1, duration: 0.8 }}
-            className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-black leading-[0.95] tracking-tighter mb-8"
+            className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl 3xl:text-[10rem] font-bold text-white leading-[0.95] tracking-tighter mb-8"
           >
             Work we're proud of
           </motion.h2>
@@ -78,37 +78,55 @@ export default function FeaturedWork() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="text-lg text-gray-600 max-w-2xl"
+            className="text-lg md:text-xl 3xl:text-2xl text-white/70 max-w-3xl"
           >
             Scroll to explore our latest projects
           </motion.p>
         </div>
 
-        {/* Scroll-based Cards */}
-        <div className="space-y-24 md:space-y-32">
+        {/* Stacking Cards */}
+        <div className="relative min-h-[400vh]">
           {CASE_STUDIES.map((study, index) => {
             const cardRef = useRef<HTMLDivElement>(null);
             const { scrollYProgress: cardProgress } = useScroll({
               target: cardRef,
-              offset: ["start end", "end start"],
+              offset: ["start end", "start start"],
             });
 
-            const scale = useTransform(cardProgress, [0, 0.5, 1], [0.8, 1, 0.9]);
-            const opacity = useTransform(cardProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0.3]);
-            const y = useTransform(cardProgress, [0, 0.5, 1], [100, 0, -50]);
+            // Calculate stacking position - each card stacks on top of previous
+            const stackOffset = index * 40; // 40px offset for each card
+            const isLast = index === CASE_STUDIES.length - 1;
+            
+            // Scale: starts at 0.9, grows to 1 as it enters
+            const scale = useTransform(
+              cardProgress, 
+              [0, 0.5, 1], 
+              [0.9, 1, 1]
+            );
+            
+            // Y position: moves up and sticks
+            const y = useTransform(
+              cardProgress,
+              [0, 0.5, 1],
+              [200, stackOffset, stackOffset]
+            );
 
             return (
               <motion.div
                 key={study.slug}
                 ref={cardRef}
-                style={{ scale, opacity, y }}
-                className="relative"
+                style={{ 
+                  scale,
+                  y,
+                  zIndex: CASE_STUDIES.length - index,
+                }}
+                className="sticky top-24 will-change-transform"
               >
                 <Link
                   href={`/work/${study.slug}`}
                   className="block group"
                 >
-                  <div className="relative h-[500px] md:h-[600px] lg:h-[700px] rounded-3xl overflow-hidden shadow-elegant-xl">
+                  <div className="relative h-[500px] md:h-[600px] lg:h-[700px] 3xl:h-[800px] rounded-3xl overflow-hidden shadow-2xl">
                     {/* Image */}
                     <div className="absolute inset-0">
                       <Image
@@ -123,65 +141,40 @@ export default function FeaturedWork() {
                     <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/40 to-transparent" />
 
                     {/* Content */}
-                    <div className="absolute inset-0 flex flex-col justify-between p-8 md:p-12 lg:p-16">
+                    <div className="absolute inset-0 flex flex-col justify-between p-8 md:p-12 lg:p-16 3xl:p-20">
                       {/* Top: Client badge */}
                       <div>
-                        <motion.span
-                          initial={{ opacity: 0, y: 20 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          viewport={{ once: true }}
-                          className="inline-block px-4 py-2 bg-white/90 backdrop-blur-sm rounded-full text-sm font-medium text-black uppercase tracking-wider shadow-lg"
-                        >
+                        <span className="inline-block px-4 py-2 bg-white/90 backdrop-blur-sm rounded-full text-sm font-medium text-black uppercase tracking-wider shadow-lg">
                           {study.client}
-                        </motion.span>
+                        </span>
                       </div>
 
                       {/* Bottom: Title and tags */}
                       <div>
-                        <motion.h3
-                          initial={{ opacity: 0, y: 30 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: 0.1 }}
-                          className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 leading-[0.95] tracking-tighter"
-                        >
+                        <h3 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl 3xl:text-8xl font-bold text-white mb-4 leading-[0.95] tracking-tighter">
                           {study.title}
-                        </motion.h3>
-                        <motion.p
-                          initial={{ opacity: 0, y: 20 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: 0.2 }}
-                          className="text-white/90 text-lg md:text-xl mb-6"
-                        >
+                        </h3>
+                        <p className="text-white/90 text-lg md:text-xl 3xl:text-2xl mb-6">
                           {study.subtitle}
-                        </motion.p>
+                        </p>
                         
-                        <motion.div
-                          initial={{ opacity: 0, y: 20 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: 0.3 }}
-                          className="flex flex-wrap gap-3"
-                        >
+                        <div className="flex flex-wrap gap-3">
                           {study.tags.map((tag, i) => (
                             <span
                               key={i}
-                              className="px-4 py-2 text-sm text-white/80 border border-white/30 rounded-full backdrop-blur-sm"
+                              className="px-4 py-2 text-sm 3xl:text-base text-white/80 border border-white/30 rounded-full backdrop-blur-sm"
                             >
                               {tag}
                             </span>
                           ))}
-                        </motion.div>
+                        </div>
                       </div>
                     </div>
 
                     {/* View button */}
                     <motion.div
-                      initial={{ scale: 0 }}
-                      whileInView={{ scale: 1 }}
                       whileHover={{ scale: 1.1 }}
-                      className="absolute top-8 right-8 md:top-12 md:right-12 w-16 h-16 bg-red-600 rounded-full flex items-center justify-center shadow-elegant-xl"
+                      className="absolute top-8 right-8 md:top-12 md:right-12 3xl:top-16 3xl:right-16 w-16 h-16 3xl:w-20 3xl:h-20 bg-red-600 rounded-full flex items-center justify-center shadow-elegant-xl"
                     >
                       <svg
                         width="24"
@@ -206,42 +199,55 @@ export default function FeaturedWork() {
           })}
         </div>
 
-        {/* View All Link */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ delay: 0.4, duration: 0.6 }}
-          className="mt-20 text-center"
-        >
-          <Link
-            href="/work"
-            className="group inline-flex items-center gap-3 text-black font-medium text-lg"
-          >
-            <span className="underline-reveal">View All Projects</span>
-            <motion.span
-              className="w-10 h-10 rounded-full bg-red-600 flex items-center justify-center"
-              whileHover={{ scale: 1.1, rotate: 45 }}
-              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+        {/* View All CTA - Styled like main CTA */}
+        <div className="-mt-[40vh]">
+          <Link href="/work" className="block group">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+              className="relative flex flex-col md:flex-row items-center justify-between bg-black rounded-3xl p-12 md:p-16 overflow-hidden shadow-elegant-xl group-hover:shadow-2xl transition-all"
             >
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                className="text-white"
+              {/* Animated background gradient */}
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-red-600 to-red-700 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+              />
+
+              {/* Content */}
+              <div className="relative z-10 mb-8 md:mb-0">
+                <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight">
+                  View All Projects
+                </h3>
+              </div>
+
+              {/* Arrow Button */}
+              <motion.div
+                className="relative z-10 flex-shrink-0"
+                whileHover={{ scale: 1.1, rotate: 45 }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
-                <path
-                  d="M5 12H19M19 12L12 5M19 12L12 19"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </motion.span>
+                <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white flex items-center justify-center shadow-elegant">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    className="text-black -rotate-45"
+                  >
+                    <path
+                      d="M5 12H19M19 12L12 5M19 12L12 19"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </div>
+              </motion.div>
+            </motion.div>
           </Link>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

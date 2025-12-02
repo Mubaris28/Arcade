@@ -1,11 +1,10 @@
 import { Metadata } from "next";
 import Hero from "@/components/sections/Hero";
-import TwoUpSection from "@/components/sections/TwoUpSection";
 import Services from "@/components/sections/Services";
 import BrandShowcase from "@/components/sections/BrandShowcase";
 import FeaturedWork from "@/components/sections/FeaturedWork";
 import CTA from "@/components/sections/CTA";
-import VideoSection from "@/components/sections/VideoSection";
+import GradientFlowBackground from "@/components/animations/GradientFlowBackground";
 
 export const metadata: Metadata = {
   title: "Arcade Studios | Web Development Agency",
@@ -44,14 +43,16 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   return (
-    <div className="bg-white min-h-screen">
-      <Hero />
-      <TwoUpSection />
-      <Services />
-      <BrandShowcase />
-      <FeaturedWork />
-      <VideoSection />
-      <CTA title="Let's build something extraordinary" href="/contact" />
-    </div>
+    <>
+      <GradientFlowBackground />
+      <div className="relative min-h-screen">
+        <Hero />
+        <FeaturedWork />
+        <BrandShowcase />
+        <Services />
+        
+        <CTA title="Let's build something extraordinary" href="/contact" />
+      </div>
+    </>
   );
 }
