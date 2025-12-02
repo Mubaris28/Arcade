@@ -69,7 +69,7 @@ body {
   background: #555;
 }
 
-/* Utility Clsses */
+/* Utility Csses */
 @layer utilities {
   .text-balance {
     text-wrap: balance;
