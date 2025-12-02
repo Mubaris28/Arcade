@@ -13,7 +13,7 @@ export default function Footer() {
     <footer ref={containerRef} className="pb-4 px-4 lg:px-6 3xl:px-12">
       {/* Footer Content */}
       <div className="w-full mx-auto">
-        <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl shadow-elegant py-16 md:py-20 px-6 lg:px-12 3xl:px-20">
+        <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl shadow-elegant py-16 md:py-20 px-6 lg:px-12 3xl:px-20">
           {/* Large Statement Text */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -22,7 +22,7 @@ export default function Footer() {
             className="mb-20"
           >
             <h2 className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl 3xl:text-[10rem] font-medium text-white leading-[1.1] tracking-tight">
-              Building digital experiences since {new Date().getFullYear() - 5}
+              Just do it.
             </h2>
           </motion.div>
 

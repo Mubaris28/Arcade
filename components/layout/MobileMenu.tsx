@@ -46,7 +46,7 @@ export default function MobileMenu({ isOpen, onClose, buttonPosition }: MobileMe
             onClick={onClose}
           />
 
-          {/* Menu Panel with Wave Effect */}
+          {/* Menu Panel with Smooth Wave Effect */}
           <motion.div
             initial={{ 
               clipPath: `circle(0% at ${clipPathOrigin})`,
@@ -61,8 +61,8 @@ export default function MobileMenu({ isOpen, onClose, buttonPosition }: MobileMe
               opacity: 0
             }}
             transition={{ 
-              duration: 0.6, 
-              ease: [0.22, 1, 0.36, 1]
+              duration: 0.8, 
+              ease: [0.16, 1, 0.3, 1]
             }}
             className="fixed inset-0 w-full bg-white z-50 shadow-elegant-xl"
           >
@@ -108,9 +108,9 @@ export default function MobileMenu({ isOpen, onClose, buttonPosition }: MobileMe
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ 
-                        delay: 0.3 + (index * 0.1), 
-                        duration: 0.4,
-                        ease: [0.22, 1, 0.36, 1]
+                        delay: 0.4 + (index * 0.08), 
+                        duration: 0.6,
+                        ease: [0.16, 1, 0.3, 1]
                       }}
                     >
                       <Link
@@ -131,9 +131,9 @@ export default function MobileMenu({ isOpen, onClose, buttonPosition }: MobileMe
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ 
-                  delay: 0.6, 
-                  duration: 0.4,
-                  ease: [0.22, 1, 0.36, 1]
+                  delay: 0.7, 
+                  duration: 0.6,
+                  ease: [0.16, 1, 0.3, 1]
                 }}
               >
                 <Link
@@ -151,8 +151,8 @@ export default function MobileMenu({ isOpen, onClose, buttonPosition }: MobileMe
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ 
-                  delay: 0.7, 
-                  duration: 0.4
+                  delay: 0.8, 
+                  duration: 0.6
                 }}
               >
                 <p className="text-sm text-gray-600 mb-4">

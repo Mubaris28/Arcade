@@ -28,18 +28,18 @@ export default function CTA({
       ref={containerRef}
       className="relative py-20 md:py-28 overflow-hidden"
     >
-      <div className="w-full mx-auto px-6 lg:px-12 3xl:px-24 relative z-10">
+      <div className="w-full mx-auto px-4 lg:px-6 3xl:px-12 relative z-10">
         <motion.div style={{ scale }}>
           <Link href={href} className="block group">
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
               transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="relative flex flex-col md:flex-row items-center justify-between bg-black rounded-3xl p-12 md:p-16 3xl:p-20 overflow-hidden shadow-elegant-xl group-hover:shadow-elegant-xl transition-all"
+              className="relative flex flex-col md:flex-row items-center justify-between bg-gradient-to-r from-red-600 to-red-700 rounded-3xl p-12 md:p-16 3xl:p-20 overflow-hidden shadow-elegant-xl group-hover:shadow-2xl transition-all"
             >
-              {/* Animated background gradient */}
+              {/* Animated background gradient on hover - darker red */}
               <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-red-600 to-red-700 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                className="absolute inset-0 bg-gradient-to-r from-red-700 to-red-800 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
               />
 
               {/* Content */}

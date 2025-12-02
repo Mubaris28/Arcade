@@ -34,8 +34,10 @@ export default function Services() {
       className="relative py-32 md:py-40 overflow-hidden"
     >
       <div className="relative z-10 w-full mx-auto px-6 lg:px-12 3xl:px-24">
-        {/* Section Header */}
-        <div className="mb-16 md:mb-20">
+        {/* Glass Container */}
+        <div className="bg-white/5 backdrop-blur-md rounded-3xl p-8 md:p-12 3xl:p-16 border border-white/10">
+          {/* Section Header */}
+          <div className="mb-16 md:mb-20">
           <motion.span
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -78,8 +80,8 @@ export default function Services() {
               }}
               className="group relative border-t border-white/10 hover:border-white/30 transition-all duration-500"
             >
-              {/* Hover background effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-red-600/0 via-red-600/5 to-red-600/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              {/* Hover background effect - White highlight */}
+              <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               
               <div className="relative py-8 md:py-12 flex items-center justify-between gap-8">
                 <div className="flex-1">
@@ -91,7 +93,7 @@ export default function Services() {
                 {/* Arrow icon */}
                 <div className="flex-shrink-0 opacity-0 group-hover:opacity-100 transform translate-x-[-20px] group-hover:translate-x-0 transition-all duration-500">
                   <svg 
-                    className="w-8 h-8 md:w-12 md:h-12 3xl:w-16 3xl:h-16 text-red-600" 
+                    className="w-8 h-8 md:w-12 md:h-12 3xl:w-16 3xl:h-16 text-white" 
                     fill="none" 
                     stroke="currentColor" 
                     viewBox="0 0 24 24"
@@ -116,6 +118,7 @@ export default function Services() {
             className="border-t border-white/10"
           />
         </div>
+      </div>
       </div>
     </section>
   );
