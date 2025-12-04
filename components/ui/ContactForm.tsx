@@ -64,7 +64,7 @@ export default function ContactForm() {
         <div>
           <label
             htmlFor="name"
-            className="block text-sm font-semibold text-gray-700 mb-2"
+            className="block text-sm font-semibold text-white/90 mb-2 uppercase tracking-wider"
           >
             Name *
           </label>
@@ -73,14 +73,15 @@ export default function ContactForm() {
             id="name"
             {...register("name")}
             className={cn(
-              "w-full px-4 py-3 border rounded transition-colors",
-              "focus:outline-none focus:border-black",
-              errors.name ? "border-red-500" : "border-gray-300"
+              "w-full px-4 py-4 bg-white/5 backdrop-blur-sm border rounded-xl transition-all",
+              "text-white placeholder:text-white/40",
+              "focus:outline-none focus:border-red-400 focus:bg-white/10",
+              errors.name ? "border-red-500" : "border-white/10"
             )}
             placeholder="Your name"
           />
           {errors.name && (
-            <p className="mt-1 text-sm text-red-500">{errors.name.message}</p>
+            <p className="mt-2 text-sm text-red-400">{errors.name.message}</p>
           )}
         </div>
 
@@ -88,7 +89,7 @@ export default function ContactForm() {
         <div>
           <label
             htmlFor="email"
-            className="block text-sm font-semibold text-gray-700 mb-2"
+            className="block text-sm font-semibold text-white/90 mb-2 uppercase tracking-wider"
           >
             Email *
           </label>
@@ -97,14 +98,15 @@ export default function ContactForm() {
             id="email"
             {...register("email")}
             className={cn(
-              "w-full px-4 py-3 border rounded transition-colors",
-              "focus:outline-none focus:border-black",
-              errors.email ? "border-red-500" : "border-gray-300"
+              "w-full px-4 py-4 bg-white/5 backdrop-blur-sm border rounded-xl transition-all",
+              "text-white placeholder:text-white/40",
+              "focus:outline-none focus:border-red-400 focus:bg-white/10",
+              errors.email ? "border-red-500" : "border-white/10"
             )}
             placeholder="your@email.com"
           />
           {errors.email && (
-            <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>
+            <p className="mt-2 text-sm text-red-400">{errors.email.message}</p>
           )}
         </div>
 
@@ -112,7 +114,7 @@ export default function ContactForm() {
         <div>
           <label
             htmlFor="company"
-            className="block text-sm font-semibold text-gray-700 mb-2"
+            className="block text-sm font-semibold text-white/90 mb-2 uppercase tracking-wider"
           >
             Company
           </label>
@@ -120,7 +122,7 @@ export default function ContactForm() {
             type="text"
             id="company"
             {...register("company")}
-            className="w-full px-4 py-3 border border-gray-300 rounded transition-colors focus:outline-none focus:border-black"
+            className="w-full px-4 py-4 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl transition-all text-white placeholder:text-white/40 focus:outline-none focus:border-red-400 focus:bg-white/10"
             placeholder="Your company (optional)"
           />
         </div>
@@ -129,7 +131,7 @@ export default function ContactForm() {
         <div>
           <label
             htmlFor="message"
-            className="block text-sm font-semibold text-gray-700 mb-2"
+            className="block text-sm font-semibold text-white/90 mb-2 uppercase tracking-wider"
           >
             Message *
           </label>
@@ -138,14 +140,15 @@ export default function ContactForm() {
             rows={6}
             {...register("message")}
             className={cn(
-              "w-full px-4 py-3 border rounded transition-colors resize-vertical",
-              "focus:outline-none focus:border-black",
-              errors.message ? "border-red-500" : "border-gray-300"
+              "w-full px-4 py-4 bg-white/5 backdrop-blur-sm border rounded-xl transition-all resize-vertical",
+              "text-white placeholder:text-white/40",
+              "focus:outline-none focus:border-red-400 focus:bg-white/10",
+              errors.message ? "border-red-500" : "border-white/10"
             )}
             placeholder="Tell us about your project..."
           />
           {errors.message && (
-            <p className="mt-1 text-sm text-red-500">
+            <p className="mt-2 text-sm text-red-400">
               {errors.message.message}
             </p>
           )}
@@ -155,7 +158,7 @@ export default function ContactForm() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full px-6 py-4 bg-black text-white rounded font-medium hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full px-6 py-5 bg-red-600 text-white rounded-xl font-medium hover:bg-red-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] text-base md:text-lg"
         >
           {isSubmitting ? "Sending..." : "Send Message"}
         </button>
@@ -163,11 +166,11 @@ export default function ContactForm() {
 
       {/* Success Message */}
       {submitStatus === "success" && (
-        <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded">
-          <p className="text-green-800 font-medium">
+        <div className="mt-6 p-6 bg-green-500/10 backdrop-blur-sm border border-green-500/30 rounded-xl">
+          <p className="text-green-400 font-medium text-lg">
             Message sent successfully!
           </p>
-          <p className="text-green-700 text-sm mt-1">
+          <p className="text-green-300/80 text-sm mt-1">
             We'll get back to you as soon as possible.
           </p>
         </div>
@@ -175,11 +178,11 @@ export default function ContactForm() {
 
       {/* Error Message */}
       {submitStatus === "error" && (
-        <div className="mt-6 p-4 bg-red-50 border border-red-200 rounded">
-          <p className="text-red-800 font-medium">
+        <div className="mt-6 p-6 bg-red-500/10 backdrop-blur-sm border border-red-500/30 rounded-xl">
+          <p className="text-red-400 font-medium text-lg">
             Something went wrong.
           </p>
-          <p className="text-red-700 text-sm mt-1">
+          <p className="text-red-300/80 text-sm mt-1">
             Please try again or email us directly.
           </p>
         </div>

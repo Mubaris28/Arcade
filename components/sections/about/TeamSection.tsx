@@ -38,30 +38,42 @@ export default function TeamSection() {
   return (
     <section
       ref={containerRef}
-      className="bg-gray-50 py-20 md:py-28"
+      className="relative py-20 md:py-28 overflow-hidden"
     >
-      <div className="max-w-screen-2xl mx-auto px-6 lg:px-12">
-        {/* Section Title */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.8 }}
-          className="mb-16"
-        >
-          <span className="inline-block px-4 py-2 bg-red-50 text-red-600 text-xs font-medium uppercase tracking-wider rounded-full mb-6">
+      <div className="w-full mx-auto px-6 lg:px-12 3xl:px-24">
+        {/* Section Header */}
+        <div className="mb-16 md:mb-20">
+          <motion.span
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.6 }}
+            className="inline-block px-4 py-2 bg-red-600 text-white text-xs font-medium uppercase tracking-wider rounded-full mb-6"
+          >
             Team
-          </span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-6">
+          </motion.span>
+
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ delay: 0.1, duration: 0.8 }}
+            className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl 3xl:text-[10rem] font-bold text-white leading-[0.95] tracking-tighter mb-8"
+          >
             Meet the team
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl leading-relaxed">
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+            className="text-lg md:text-xl 3xl:text-2xl text-white/70 max-w-3xl"
+          >
             Developers, designers, and strategists united by passion for
-            exceptional digital products.
-          </p>
-        </motion.div>
+            exceptional digital products
+          </motion.p>
+        </div>
 
         {/* Team Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 3xl:gap-10">
           {TEAM_MEMBERS.map((member, index) => (
             <motion.div
               key={index}
@@ -72,24 +84,40 @@ export default function TeamSection() {
                 duration: 0.6,
                 ease: [0.25, 0.46, 0.45, 0.94],
               }}
+              whileHover={{ y: -8 }}
               className="group"
             >
-              <div className="relative aspect-square mb-6 rounded-3xl overflow-hidden shadow-elegant group-hover:shadow-elegant-xl transition-shadow duration-500">
+              {/* Image Container with Glassmorphism */}
+              <div className="relative aspect-square mb-6 rounded-3xl overflow-hidden shadow-elegant-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-white/20 transition-all duration-500">
                 <Image
                   src={member.image}
                   alt={member.name}
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
+                
+                {/* Position badge - appears on hover */}
+                <div className="absolute top-4 right-4 px-3 py-1.5 bg-red-600 rounded-full text-white text-xs font-medium uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  {member.position}
+                </div>
               </div>
-              <h3 className="text-2xl font-bold text-black mb-2">
-                {member.name}
-              </h3>
-              <p className="text-base text-red-600 font-medium mb-3">
-                {member.position}
-              </p>
-              <p className="text-gray-600 leading-relaxed">{member.bio}</p>
+
+              {/* Text Content */}
+              <div className="space-y-2">
+                <h3 className="text-2xl md:text-3xl 3xl:text-4xl font-bold text-white group-hover:text-red-400 transition-colors">
+                  {member.name}
+                </h3>
+                <p className="text-sm md:text-base 3xl:text-lg text-white/60 uppercase tracking-wider">
+                  {member.position}
+                </p>
+                <p className="text-white/70 leading-relaxed text-sm md:text-base 3xl:text-lg pt-2">
+                  {member.bio}
+                </p>
+              </div>
+
+              {/* Decorative accent line */}
+              <div className="mt-4 h-0.5 w-0 bg-red-600 group-hover:w-12 transition-all duration-300" />
             </motion.div>
           ))}
         </div>

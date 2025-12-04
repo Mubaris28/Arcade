@@ -1,31 +1,26 @@
-import { Metadata } from "next";
-import { motion } from "framer-motion";
-import FeaturedWork from "@/components/sections/FeaturedWork";
-import CTA from "@/components/sections/CTA";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Portfolio & Case Studies | Arcade Studios",
-  description:
-    "Explore award-winning design work from Rivian, Tesla, Black Diamond, and more. View case studies showcasing brand transformation, digital products, and innovative design solutions for next-generation companies.",
-  keywords: [
-    "design portfolio",
-    "case studies",
-    "web development portfolio",
-    "digital product design",
-    "UI/UX case studies",
-  ],
-  openGraph: {
-    title: "Design Portfolio & Case Studies | Arcade Studios",
-    description: "Award-winning design work for innovative next-gen brands.",
-    type: "website",
-  },
-};
+import { useState } from "react";
+import { Metadata } from "next";
+import WorkServices from "@/components/sections/work/WorkServices";
+import WorkShowcase from "@/components/sections/work/WorkShowcase";
+import CTA from "@/components/sections/CTA";
+import GradientFlowBackground from "@/components/animations/GradientFlowBackground";
 
 export default function WorkPage() {
+  const [selectedService, setSelectedService] = useState<string | null>(null);
+
   return (
-    <div className="bg-white min-h-screen pt-20">
-      <FeaturedWork />
-      <CTA title="Have a project in mind?" href="/contact" />
-    </div>
+    <>
+      <GradientFlowBackground />
+      <div className="relative min-h-screen pt-20">
+        <WorkServices
+          onServiceSelect={setSelectedService}
+          selectedService={selectedService}
+        />
+        <WorkShowcase selectedService={selectedService} />
+        <CTA title="Have a project in mind?" href="/contact" />
+      </div>
+    </>
   );
 }

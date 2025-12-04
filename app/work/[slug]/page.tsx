@@ -4,7 +4,8 @@ import ProjectHero from "@/components/sections/work/ProjectHero";
 import ProjectStory from "@/components/sections/work/ProjectStory";
 import ProjectInsights from "@/components/sections/work/ProjectInsights";
 import ProjectGallery from "@/components/sections/work/ProjectGallery";
-import FooterImage from "@/components/sections/FooterImage";
+import CTA from "@/components/sections/CTA";
+import GradientFlowBackground from "@/components/animations/GradientFlowBackground";
 
 // Sample case study data - replace with real data or CMS
 const CASE_STUDIES: Record<
@@ -102,26 +103,24 @@ export default async function CaseStudyPage({ params }: Props) {
   }
 
   return (
-    <div className="bg-white min-h-screen">
-      {/* Debug banner - remove after testing */}
-      <div className="fixed top-20 left-0 right-0 bg-yellow-400 text-black p-2 text-center z-[100] text-sm">
-        Page is rendering! Slug: {slug}
+    <>
+      <GradientFlowBackground />
+      <div className="relative min-h-screen">
+        <ProjectHero 
+          title={caseStudy.title} 
+          client={caseStudy.client}
+          year={caseStudy.year}
+          services={caseStudy.services}
+        />
+        <ProjectStory story={caseStudy.story} />
+        <ProjectInsights 
+          insights={caseStudy.insights}
+          stats={caseStudy.stats}
+        />
+        <ProjectGallery />
+        <CTA title="Ready to start your project?" href="/contact" />
       </div>
-      
-      <ProjectHero 
-        title={caseStudy.title} 
-        client={caseStudy.client}
-        year={caseStudy.year}
-        services={caseStudy.services}
-      />
-      <ProjectStory story={caseStudy.story} />
-      <ProjectInsights 
-        insights={caseStudy.insights}
-        stats={caseStudy.stats}
-      />
-      <ProjectGallery />
-      <FooterImage />
-    </div>
+    </>
   );
 }
 

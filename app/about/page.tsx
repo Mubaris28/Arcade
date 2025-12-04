@@ -4,6 +4,7 @@ import StorySection from "@/components/sections/about/StorySection";
 import TeamSection from "@/components/sections/about/TeamSection";
 import ValuesSection from "@/components/sections/about/ValuesSection";
 import CTA from "@/components/sections/CTA";
+import GradientFlowBackground from "@/components/animations/GradientFlowBackground";
 
 export const metadata: Metadata = {
   title: "About Us | Arcade Studios | Web Development Agency",
@@ -27,12 +28,15 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="bg-white min-h-screen">
-      <AboutHero />
-      <StorySection />
-      <TeamSection />
-      <ValuesSection />
-      <CTA title="Ready to work with us?" href="/contact" />
-    </div>
+    <>
+      <GradientFlowBackground />
+      <div className="relative min-h-screen">
+        <AboutHero />
+        <StorySection />
+        <TeamSection />
+        <ValuesSection />
+        <CTA title="Ready to work with us?" href="/contact" />
+      </div>
+    </>
   );
 }

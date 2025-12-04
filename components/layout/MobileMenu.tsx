@@ -100,10 +100,10 @@ export default function MobileMenu({ isOpen, onClose, buttonPosition }: MobileMe
               </div>
 
               {/* Navigation Links */}
-              <nav className="flex-1 p-6">
-                <ul className="space-y-6">
+              <nav className="flex-1 p-6 overflow-y-auto">
+                <div className="space-y-0">
                   {NAV_LINKS.map((link, index) => (
-                    <motion.li
+                    <motion.div
                       key={link.href}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -112,17 +112,51 @@ export default function MobileMenu({ isOpen, onClose, buttonPosition }: MobileMe
                         duration: 0.6,
                         ease: [0.16, 1, 0.3, 1]
                       }}
+                      className="group relative border-t border-gray-200 hover:border-gray-400 transition-all duration-500"
                     >
+                      {/* Hover background effect */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-gray-50 via-gray-100 to-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                      
                       <Link
                         href={link.href}
                         onClick={onClose}
-                        className="text-3xl font-bold text-black hover:text-red-600 transition-colors block"
+                        className="relative py-6 flex items-center justify-between gap-8"
                       >
-                        {link.label}
+                        <h3 className="text-3xl md:text-4xl font-medium text-black tracking-tight group-hover:translate-x-4 transition-transform duration-500">
+                          {link.label}
+                        </h3>
+                        
+                        {/* Arrow icon */}
+                        <div className="flex-shrink-0 opacity-0 group-hover:opacity-100 transform translate-x-[-20px] group-hover:translate-x-0 transition-all duration-500">
+                          <svg 
+                            className="w-6 h-6 text-black" 
+                            fill="none" 
+                            stroke="currentColor" 
+                            viewBox="0 0 24 24"
+                          >
+                            <path 
+                              strokeLinecap="round" 
+                              strokeLinejoin="round" 
+                              strokeWidth={2} 
+                              d="M17 8l4 4m0 0l-4 4m4-4H3" 
+                            />
+                          </svg>
+                        </div>
                       </Link>
-                    </motion.li>
+                    </motion.div>
                   ))}
-                </ul>
+                  
+                  {/* Bottom border */}
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ 
+                      delay: 0.4 + NAV_LINKS.length * 0.08, 
+                      duration: 0.6
+                    }}
+                    className="border-t border-gray-200"
+                  />
+                </div>
               </nav>
 
               {/* CTA Button */}

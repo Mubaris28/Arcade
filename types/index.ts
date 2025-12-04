@@ -47,6 +47,25 @@ export interface SocialLink {
   icon?: string;
 }
 
+export interface WorkProject {
+  id: string;
+  title: string;
+  description: string;
+  client: string;
+  category: string;
+  tags: string[];
+  image: string;
+  year: string;
+  link?: string;
+}
+
+export interface ServiceCategory {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  works: WorkProject[];
+}
 
 
 

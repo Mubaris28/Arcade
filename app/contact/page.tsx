@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import ContactHero from "@/components/sections/contact/ContactHero";
 import ContactFormSection from "@/components/sections/contact/ContactFormSection";
+import GradientFlowBackground from "@/components/animations/GradientFlowBackground";
 
 export const metadata: Metadata = {
   title: "Contact Us | Arcade Studios | Web Development Agency",
@@ -23,10 +24,13 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="bg-white min-h-screen">
-      <ContactHero />
-      <ContactFormSection />
-    </div>
+    <>
+      <GradientFlowBackground />
+      <div className="relative min-h-screen">
+        <ContactHero />
+        <ContactFormSection />
+      </div>
+    </>
   );
 }
 
